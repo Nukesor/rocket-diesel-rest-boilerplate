@@ -9,3 +9,11 @@ pub enum MediaType {
     Movie,
     Clip,
 }
+
+#[derive(Clone, Debug, Deserialize, Serialize, DbEnum)]
+#[PgType = "library_location"]
+#[DieselType = "Library_location"]
+pub enum LibraryLocation {
+    Local,
+    SSH,
+}

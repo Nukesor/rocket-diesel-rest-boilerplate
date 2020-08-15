@@ -6,5 +6,6 @@ table! {
         name -> Text,
         media_type -> Media_type,
         path -> Text,
+        location -> Library_location,
     }
 }
