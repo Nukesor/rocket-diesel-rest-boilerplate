@@ -40,7 +40,7 @@ strum_macros = "^0.19"
 async-std = { version = "1", features = ["attributes", "unstable"] }
 
 crossterm = "^0.17"
-dialoguer = "^0.3"
+dialoguer = "^0.6"
 comfy-table= "^1"
 structopt = "0.3"
 
@@ -52,7 +52,7 @@ rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket", branch = "ma
 
 [target.'cfg(not(windows))'.dependencies]
 users = "^0.10"
-nix = "^0.17"
+nix = "^0.18"
 
 [target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
 procfs = "^0.8"
