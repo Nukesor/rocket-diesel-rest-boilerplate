@@ -7,8 +7,6 @@ use rocket_contrib::databases::{database, diesel};
 
 use movie::settings::Settings;
 
-use library::*;
-
 mod library;
 
 #[database("movie")]
@@ -27,5 +25,13 @@ pub fn get_rocket(settings: &Settings) -> Result<Rocket> {
         .port(8456)
         .finalize()?;
 
-    Ok(rocket::custom(config).mount("/library", routes![create, update, delete]))
+    Ok(rocket::custom(config).mount(
+        "/library",
+        routes![
+            library::create,
+            library::delete,
+            library::get,
+            library::update
+        ],
+    ))
 }

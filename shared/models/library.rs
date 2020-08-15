@@ -14,28 +14,35 @@ pub struct Library {
 }
 
 impl Library {
-    pub fn create(hero: Library, connection: &PgConnection) -> Library {
+    pub fn get_all(db: &PgConnection) -> Vec<Library> {
+        libraries::table
+            .order(libraries::name.desc())
+            .load::<Library>(db)
+            .unwrap()
+    }
+
+    pub fn create(library: Library, db: &PgConnection) -> Library {
         diesel::insert_into(libraries::table)
-            .values(&hero)
-            .execute(connection)
+            .values(&library)
+            .execute(db)
             .expect("Error creating new library");
 
         libraries::table
             .order(libraries::name.desc())
-            .first(connection)
+            .first(db)
             .unwrap()
     }
 
-    pub fn update(name: String, hero: Library, connection: &PgConnection) -> bool {
+    pub fn update(name: String, library: Library, db: &PgConnection) -> bool {
         diesel::update(libraries::table.find(name))
-            .set(&hero)
-            .execute(connection)
+            .set(&library)
+            .execute(db)
             .is_ok()
     }
 
-    pub fn delete(name: String, connection: &PgConnection) -> bool {
+    pub fn delete(name: String, db: &PgConnection) -> bool {
         diesel::delete(libraries::table.find(name))
-            .execute(connection)
+            .execute(db)
             .is_ok()
     }
 }

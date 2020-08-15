@@ -5,6 +5,11 @@ use movie::models::Library;
 
 use super::Db;
 
+#[get("/")]
+pub fn get(db: Db) -> Json<Vec<Library>> {
+    Json(Library::get_all(&db))
+}
+
 #[post("/", data = "<library>")]
 pub fn create(library: Json<Library>, db: Db) -> Json<Library> {
     let insert = Library {
